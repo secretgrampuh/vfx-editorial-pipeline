@@ -1,0 +1,47 @@
+# Example configuration for directory_creator.py.
+# Replace the values below with your own show's naming convention and drive layout.
+
+project:
+  # Only reference XMLs containing this token are treated as shots for this
+  # show (matches shot_reference_generator's project.prefix)
+  prefix: "SHO"
+
+paths:
+  # Root of the shot folder tree - usually a shared production drive
+  shots_root: "output/SHOTS"
+  # Where exported frame sequences land before being sorted into shot folders
+  shot_source_folder: "source_frames"
+  # Where per-shot reference XMLs land - defaults to shot_reference_generator's
+  # own output folder, since this tool consumes that one's output directly
+  xml_folder: "output/reference"
+  # KEY Nuke template, token-substituted per shot. Must contain the literal
+  # tokens X:/PROJECT_FILE.nk, _DURATION_, and X:/SOURCE_FILE.exr
+  key_template: "templates/key_template_example.nk"
+
+# Per-shot folder tree. cg_bg_* build the CG/<group>/<pass><variant>/<version>
+# matrix (e.g. CG/BG/BRUSH_TINCTURE/LATEST) - adjust to your own show's CG
+# pass/variant naming if it differs.
+folder_schema:
+  base_shot_dirs:
+    - "PLATES"
+    - "CG"
+    - "CAMERA"
+    - "CG/FG"
+    - "CG/FX"
+    - "COMP"
+    - "Nuke"
+    - "Nuke/Live_Templates"
+    - "Nuke/CG_Templates"
+    - "PLATES/vPen_Lines"
+    - "PLATES/vPen_Lines_H"
+    - "PLATES/vPen_Raster"
+    - "PLATES/vPen_Triangle"
+    - "PLATES/tincture"
+    - "PLATES/source"
+    - "PLATES/alpha"
+    - "PLATES/outlines"
+    - "PLATES/motion"
+  cg_bg_groups: ["BG", "BG/SKY"]
+  cg_bg_passes: ["BEAUTY", "BRUSH", "BRUSH_NWZ", "LINES"]
+  cg_bg_variants: ["", "_TINCTURE", "_VPEN_RASTER"]
+  cg_bg_versions: ["V1", "LATEST"]

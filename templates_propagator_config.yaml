@@ -1,0 +1,19 @@
+# Example configuration for templates_propagator.py.
+# Replace paths and the project prefix with your own show's values.
+
+project:
+  # Shot codes must match <prefix>_NNN_XXXX_ShNNNNN, e.g. SHO_010_SCEN_Sh0010
+  prefix: "SHO"
+
+paths:
+  shots_root: "output/SHOTS"
+  template_dir: "templates"
+  # Live-action roto/paint template. Ships as a minimal placeholder - the
+  # real one drove a proprietary rotoscope toolset, see templates/README.
+  roto_template: "roto_plate_template_example.nk"
+  # CG BG/FG beauty-pass template - same placeholder caveat as above.
+  cg_template: "cg_template_example.nk"
+  # Director's comp template - this one is the real thing, native Nuke
+  # nodes only, no proprietary plugin dependency.
+  directors_comp_template: "directors_comp_template.nk"
+  log_dir: "output/logs/templates_propagator"

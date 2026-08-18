@@ -1,0 +1,21 @@
+#! Minimal example KEY template for directory_creator.py.
+# This is a placeholder, not the original production template - that file
+# wasn't part of what got archived from the real show. It exists so this
+# tool is runnable out of the box. Swap in your own Nuke script as long as
+# it contains the three literal tokens below.
+Root {
+ last_frame _DURATION_
+ name X:/PROJECT_FILE.nk
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+}
+Read {
+ inputs 0
+ file X:/SOURCE_FILE.exr
+ first 1
+ last _DURATION_
+ name Read1
+}
+Write {
+ file X:/PROJECT_FILE.nk
+ name Write1
+}

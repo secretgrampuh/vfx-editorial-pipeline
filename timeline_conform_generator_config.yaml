@@ -1,0 +1,31 @@
+# Example configuration for timeline_conform_generator.py.
+# Replace credentials, paths, and show-specific values with your own.
+
+project:
+  prefix: "SHO"
+  # Filename pattern used to find delivered comp movies under shots_root.
+  comp_file_glob: "*comp*.mov"
+  # Delivered files under a path containing any of these markers are
+  # skipped - trailer cuts, shared/reference material, anything that
+  # isn't a real timeline shot.
+  excluded_path_markers: ["SHARED", "_Trailer"]
+  # ShotGrid HumanUser names (case-insensitive) whose Versions are
+  # ignored - internal QC/test accounts that create "comp" Versions but
+  # shouldn't ever land on the editor's conform.
+  excluded_creators: []
+
+paths:
+  shots_root: "output/SHOTS"
+  # The picture-locked full-movie timeline export every shot's position
+  # gets cloned out of. Not something this repo can ship a real example
+  # of - export your own show's locked cut as an FCP7 XML.
+  template_xml: "templates/picture_lock_template.xml"
+  output_dir: "output/conform_xmls"
+  archive_dir: "output/conform_xmls/zArchive"
+
+# This studio's own ShotGrid site - where comp Versions are queried from.
+shotgrid_studio:
+  server: "https://your-studio.shotgrid.autodesk.com"
+  script_name: "PythonScript"
+  script_key: "REPLACE_ME"
+  project_id: 0

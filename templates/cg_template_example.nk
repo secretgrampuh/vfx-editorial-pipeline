@@ -1,0 +1,26 @@
+#! Minimal example CG-beauty template for templates_propagator.py.
+# The real production template drove the same proprietary rotoscope
+# toolset as the plate template - this is a native-Nuke stand-in
+# demonstrating the token contract only. The same template file stamps
+# both BG and FG passes, so it deliberately has no BG/FG in its tokens.
+Root {
+ shots_root W:/SHO/SHOTS
+ scene_code SHO_000_AAA
+ shot_code SHO_000_AAA_Sh00000
+ first_frame 1001
+ last_frame 1101
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+}
+Read {
+ inputs 0
+ file READ_PATH_CG_BEAUTY
+ name CGBeautyRead
+}
+Write {
+ file WRITE_PATH_CG_BEAUTY_VPEN_RASTER.exr
+ name VpenRasterWrite
+}
+Write {
+ file WRITE_PATH_CG_BEAUTY_TINCTURE.exr
+ name TinctureWrite
+}

@@ -1,0 +1,51 @@
+#! Minimal example plate/roto template for templates_propagator.py.
+# The real production template drove a proprietary third-party rotoscope
+# toolset (custom Nuke plugin nodes) that isn't available/redistributable,
+# so this is a native-Nuke stand-in demonstrating the token contract only -
+# swap in your own template as long as it keeps these tokens.
+Root {
+ shots_root W:/SHO/SHOTS
+ scene_code SHO_000_AAA
+ shot_code SHO_000_AAA_Sh00000
+ first_frame 1001
+ last_frame 1101
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+}
+Read {
+ inputs 0
+ file READ_PATH_PLATE
+ name PlateRead
+}
+Read {
+ inputs 0
+ file READ_PATH_ROTO
+ name RotoRead
+}
+Write {
+ file WRITE_PATH_TINCTURE.exr
+ name TinctureWrite
+}
+Write {
+ file WRITE_PATH_OUTLINES.exr
+ name OutlinesWrite
+}
+Write {
+ file WRITE_PATH_MOTION.exr
+ name MotionWrite
+}
+Write {
+ file WRITE_PATH_VPEN_TRIANGLE.exr
+ name VpenTriangleWrite
+}
+Write {
+ file WRITE_PATH_VPEN_LINES_HORIZONTAL.exr
+ name VpenLinesHorizontalWrite
+}
+Write {
+ file WRITE_PATH_VPEN_LINES.exr
+ name VpenLinesWrite
+}
+Write {
+ file WRITE_PATH_VPEN_RASTER.exr
+ name VpenRasterWrite
+}

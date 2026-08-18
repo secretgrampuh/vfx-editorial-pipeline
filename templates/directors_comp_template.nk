@@ -1,0 +1,138 @@
+#! C:/Program Files/Nuke13.2v5/nuke-13.2.5.dll -nx
+#write_info Write1 file:"WRITE_READ_PATH_COMP.exr" format:"4096 2160 1" chans:":rgba.red:rgba.green:rgba.blue:" framerange:"1001 1002" fps:"0" colorspace:"SLog3" datatype:"16 bit half" transfer:"unknown" views:"main" colorManagement:"Nuke"
+version 13.2 v5
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1917" h="1128" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1254" stretch="1"/>
+            <splitter orientation="2">
+                <split size="638"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="448"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name TEMPLATE_ROOT/directors_comp_template.nk
+ frame 1001
+ first_frame 1001
+ last_frame 1002
+ lock_range true
+ fps 23.976
+ format "4096 2160 0 0 4096 2160 1 4K_DCP"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ monitorOutLUT rec709
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+ addUserKnob {20 User}
+ addUserKnob {1 shots_root l "Shots Root"}
+ addUserKnob {1 scene_code l "Scene Code"}
+ addUserKnob {1 shot_code l "Shot Code"}
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode76
+ tile_color 0x3d4389ff
+ label "Save 4k Directors Comp"
+ note_font_size 30
+ xpos -1714
+ ypos 3665
+ bdwidth 410
+ bdheight 251
+}
+Read {
+ inputs 0
+ file_type exr
+ file READ_PATH_COMP.exr
+ localizationPolicy on
+ first 1001
+ last 1002
+ origfirst 1001
+ origlast 1002
+ origset true
+ version 404
+ colorspace SLog3
+ name Read20
+ tile_color 0xff00ff
+ label "Approved Final COMP READ NODE"
+ selected true
+ xpos -1541
+ ypos 3277
+}
+Crop {
+ box {0 0 4096 2160}
+ crop false
+ name Crop1
+ xpos -1541
+ ypos 3409
+}
+Remove {
+ operation keep
+ channels rgb
+ name Remove1
+ xpos -1541
+ ypos 3447
+}
+Crop {
+ box {0 0 4096 2160}
+ crop false
+ name Crop2
+ xpos -1541
+ ypos 3748
+}
+Remove {
+ operation keep
+ channels rgb
+ name Remove2
+ xpos -1541
+ ypos 3783
+}
+Write {
+ file WRITE_READ_PATH_COMP.exr
+ colorspace SLog3
+ file_type exr
+ compression DWAB
+ interleave channels
+ first_part rgba
+ create_directories true
+ checkHashOnRead false
+ version 39
+ name Write1
+ tile_color 0xffff
+ xpos -1541
+ ypos 3825
+}
+Viewer {
+ frame_range 1001-1002
+ fps 23.97602463
+ monitorOutOutputTransform rec709
+ name Viewer1
+ xpos -1385
+ ypos 3437
+}

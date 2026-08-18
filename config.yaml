@@ -1,0 +1,32 @@
+# Example configuration for shot_reference_generator.py.
+# Replace the values below with your own show's naming convention and storage layout.
+
+project:
+  # Prefix applied to every generated shot code, e.g. SHO_010_SCEN_Sh0010
+  prefix: "SHO"
+  # Video track number the editor used to lay down scene-marker clips in the timeline XML
+  scene_marker_track: 4
+  # Frames of handle padded onto each side of a shot when writing its reference XML
+  handle_frames: 4
+  # Scene and shot numbers climb by this amount (not by 1) and shot numbers
+  # reset to this value at the start of each new scene, e.g. SHO_010_SCEN_Sh0010,
+  # SHO_010_SCEN_Sh0020, SHO_020_NEXT_Sh0010 - leaving room to insert a new
+  # scene or shot later (e.g. SHO_015_...) without renumbering anything else.
+  number_step: 10
+
+paths:
+  template_dir: "templates"
+  shot_numbers_template: "shot_numbers_template.xml"
+  transparent_element_template: "transparent_element_template.xml"
+  burn_in_template: "burn_in_track.xml"
+  burn_in_graphic: "templates/burn_in_graphic.png"
+  output_dir: "output"
+  reference_output_dir: "output/reference"
+
+storage:
+  # Internal file-server hostname referenced in editorial XML clip paths
+  hostname: "your-storage-server"
+  # Native camera media convention: <root><native_footage_root>/<first 4 chars of
+  # filename>/XDROOT/Clip/<FILENAME>.MXF - XDROOT/Clip is the folder layout Sony
+  # XDCAM camera media is delivered in, adjust if your cameras use a different one.
+  native_footage_root: "FOOTAGE/NATIVE"

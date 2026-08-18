@@ -1,0 +1,5 @@
+lxml>=4.9
+PyYAML>=6.0
+shotgun-api3>=3.4
+patool>=1.12
+opencv-python-headless>=4.9

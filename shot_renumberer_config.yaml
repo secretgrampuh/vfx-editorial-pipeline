@@ -1,0 +1,9 @@
+# Example configuration for shot_renumberer.py.
+
+# File types renamed when a shot code changes.
+renamed_extensions: [".exr", ".mov", ".mp4", ".png"]
+
+# Files sitting inside a folder with any of these exact names are left
+# alone - camera-original source and reference footage predates a
+# renumber and shouldn't be touched.
+skip_folder_markers: ["_Reference", "source"]

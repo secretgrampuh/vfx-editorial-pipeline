@@ -1,0 +1,12 @@
+# Example configuration for toolset_switcher.py.
+# List every show/context whose Nuke toolset artists need to switch
+# between. Add as many as you need - the script doesn't hardcode a count.
+
+# Leave null to default to ~/.nuke/init.py (works on Windows, macOS, Linux).
+# Set explicitly only if your studio puts it somewhere nonstandard.
+nuke_init_path: null
+
+toolsets:
+  showa: "X:/SHOWA/Nuke_Toolset/Latest"
+  showb: "X:/SHOWB/Nuke_Toolset/Latest"
+  experimental: "X:/Resources/Nuke_Experimental/Toolset/Latest"

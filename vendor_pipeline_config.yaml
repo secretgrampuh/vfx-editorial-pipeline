@@ -1,0 +1,92 @@
+# Shared example configuration for conductor_downloader.py, roto_forwarder.py,
+# delivery_sorter.py, shotgrid_status_mirror.py, and vendor_note_sync.py.
+# Replace credentials, paths, and vendor/project details with your own.
+
+project:
+  prefix: "SHO"
+  shots_root: "output/SHOTS"
+  vendor_share_root: "output/VendorShare"
+  log_dir: "output/logs/vendor_pipeline"
+  # Where the Conductor job-id completion cache is kept between runs, so
+  # already-downloaded jobs aren't re-fetched every time the tool runs.
+  conductor_cache_path: "output/logs/vendor_pipeline/conductor_completed_jobs.json"
+  # Job IDs below this are assumed purged from Conductor's servers - skip
+  # instead of erroring on every run.
+  conductor_job_id_cutoff: 30000
+
+# This studio's own ShotGrid site - the destination every tool uploads to.
+shotgrid_studio:
+  server: "https://your-studio.shotgrid.autodesk.com"
+  script_name: "PythonScript"
+  script_key: "REPLACE_ME"
+  project_id: 0
+
+# The CG vendor's own separate ShotGrid site - conductor_downloader.py reads
+# review versions from here.
+shotgrid_cg_vendor:
+  server: "https://your-cg-vendor.shotgrid.autodesk.com"
+  script_name: "PythonScript"
+  script_key: "REPLACE_ME"
+  project_id: 0
+
+# ShotGrid HumanUser ids that uploaded Versions get attributed to, by task
+# type. The original hardcoded two coworkers' ids directly in source for
+# this - move that out to config instead.
+uploader_ids:
+  comp: 0
+  tracking: 0
+
+vendors:
+  cg_vendor_name: "CGVendor"
+  roto_vendor_name: "RotoVendor"
+  tracking_vendor_name: "TrackingVendor"
+
+# delivery_sorter.py infers which vendor a delivery is from by checking
+# for these folder-name markers somewhere in the source path, matching
+# the VendorShare folder convention (e.g. a real delivery might sit under
+# .../VendorShare/RotoVendorToStudio/2024-01-15/...).
+vendor_paths:
+  roto_marker: "RotoVendorToStudio"
+  tracking_marker: "TrackingVendorToStudio"
+
+# shotgrid_status_mirror.py settings - keeps this studio's own ShotGrid in
+# sync with the CG vendor's separate site (shotgrid_cg_vendor above). Only
+# relevant on shows where the vendor needed their own ShotGrid instance
+# stood up before the studio's own instance was ready, so two sites had to
+# be reconciled by hand otherwise.
+task_mirror:
+  # Which Task (by content/name) gets its status mirrored vendor -> studio.
+  task_content: "Tracking"
+  # Studio statuses that should never be overwritten, even if the vendor's
+  # status disagrees (e.g. studio is holding it in an internal review pass).
+  studio_skip_statuses: ["edit"]
+  # Vendor status codes translated to this studio's status code schema,
+  # since the two sites don't necessarily share short-code conventions.
+  vendor_status_map:
+    nts: "ip"
+
+# Same idea as task_mirror, applied to Version status instead of Task
+# status. Written but never scheduled in the original production daemon -
+# see README for what that means for this mode's evidence level.
+version_mirror:
+  studio_skip_statuses: ["edit"]
+  vendor_status_map: {}
+
+# vendor_note_sync.py settings - mirrors CG/tracking vendor review notes,
+# attachments, and approval status onto this studio's own ShotGrid.
+vendor_note_sync:
+  # Which Task (by content/name) cascades when a CG vendor Version is
+  # approved or gets notes - e.g. "Lighting" on a CG-heavy show.
+  lighting_task_content: "Lighting"
+  # ShotGrid Group/HumanUser ids every synced note gets addressed to.
+  cc_group_id: 0
+  default_addressee_id: 0
+  # Where downloaded note attachments land before being re-uploaded.
+  notes_attachment_root: "output/vendor_notes"
+  # Warn (not block) on synced comments longer than this - usually means
+  # the note-text parsing picked up more than just the intended comment.
+  max_note_length: 200
+  # A vendor Version status that should clear the studio's status instead
+  # of being copied across as-is (e.g. a vendor-side "on hold" state that
+  # doesn't map to anything meaningful on the studio side).
+  vendor_status_skip: "hld"
