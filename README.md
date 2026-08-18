@@ -11,6 +11,8 @@ Here's what the final rotoscoped look actually looked like for two of the exampl
 <img src="docs/images/roto_style_nght.png" width="500" alt="Final rotoscoped look for the DMO_070_NGHT example shot">
 <img src="docs/images/roto_style_zoom.png" width="500" alt="Final rotoscoped look for the DMO_090_ZOOM example shot">
 
+OK! Now on to the in-depth explanation:
+
 Eleven tools built for a 1700+ shot feature blending live-action, rotoscoping, and multiple CG layers per shot, split into five groups. Four chain together on the ingest/build side to do the following:
 
 - one turns an editor's full-movie timeline export into per-shot reference XMLs
