@@ -1,5 +1,16 @@
 # VFX Editorial Pipeline
 
+**TL;DR** — This pipeline was built over about 15 months for an animation studio. This particular pipeline works for a live action → CG → full rotoscoped pipeline (think *A Scanner Darkly* or *Waking Life* art style).
+
+The project involved our studio and 2 different vendors, and artists across 4 different continents — so it was critical to automate the movement of files to ensure standardization and consistency of data delivery. Ultimately, what you see in this repo would send and receive all files to and from vendors, update and sync all ShotGrid instances (there were 2), and automatically generate a brand new timeline for the editor so they never had to waste time importing new shots and cutting them into the timeline. This was entirely run on Python, which made it incredibly simple to reconfigure and deploy on new shows when the studio brought in new projects.
+
+If you're interested in deploying a similar round-trip file delivery system and timeline automation on your show, google me up and give me a call.
+
+Here's what the final rotoscoped look actually looked like for two of the example shots referenced throughout this README:
+
+<img src="docs/images/roto_style_nght.png" width="500" alt="Final rotoscoped look for the DMO_070_NGHT example shot">
+<img src="docs/images/roto_style_zoom.png" width="500" alt="Final rotoscoped look for the DMO_090_ZOOM example shot">
+
 Eleven tools built for a 1700+ shot feature blending live-action, rotoscoping, and multiple CG layers per shot, split into five groups. Four chain together on the ingest/build side to do the following:
 
 - one turns an editor's full-movie timeline export into per-shot reference XMLs
